@@ -54,8 +54,11 @@ main {
 .grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    margin: 0 auto;
+    max-width: 1000px;
+    justify-content: center;
     align-items: stretch;
+    gap: 20px;
 }
 
 .card {

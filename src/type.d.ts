@@ -1,3 +1,1 @@
-type Product = {
-    title: string;
-};
+
