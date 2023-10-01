@@ -15,7 +15,7 @@ const getProductFromFile = (cb: (proList: Product[]) => void) => {
 };
 
 export class Product {
-    constructor(public title: string) {}
+    constructor(public title: string, public imageUrl: string, public description: string, public price: number) {}
 
     save() {
         getProductFromFile((products) => {
