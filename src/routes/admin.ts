@@ -9,4 +9,6 @@ router.get('/products', adminController.getProducts);
 
 router.post('/add-product', adminController.postAddProduct);
 
+router.post('/delete-product/:prodId', adminController.deleteProduct);
+
 export default router;

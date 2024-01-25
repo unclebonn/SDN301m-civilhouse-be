@@ -15,8 +15,8 @@ mixin printProds(...products)
                 p.product__description #{prod.description}
             .card__actions
                 a.btn(href='/admin/edit-product') Edit
-                form(action='/admin/delete-product' method='POST')
-                    button.btn(href='/') Delete
+                form(action=`/admin/delete-product/${prod.id}` method='POST')
+                    button.btn(type='submit') Delete
 
 block content
     main
