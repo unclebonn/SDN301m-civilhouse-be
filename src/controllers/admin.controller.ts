@@ -1,4 +1,3 @@
-import { Blog, User } from "~/models";
-
+import { Blog, User } from '~/models';
 
 console.log(typeof User);

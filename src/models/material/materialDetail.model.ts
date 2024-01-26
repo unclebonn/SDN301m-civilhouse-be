@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb";
-import mongoose from "mongoose";
+import { ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
 
 // MaterialType Schema
 const materialTypeSchema = new mongoose.Schema({
@@ -7,4 +7,4 @@ const materialTypeSchema = new mongoose.Schema({
   name: String
 });
 
-export const MaterialType = mongoose.model("MaterialType", materialTypeSchema);
+export const MaterialType = mongoose.model('MaterialType', materialTypeSchema);
