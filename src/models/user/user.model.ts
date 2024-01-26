@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import validator from 'validator';
 
 const userSchema = new mongoose.Schema({
-  _id: ObjectId,
+  // _id: ObjectId,
   username: { type: String, required: true },
   password: { type: String, required: true },
   passwordConfirm: {
