@@ -20,7 +20,7 @@
     "ts-node": {
         "require": ["tsconfig-paths/register"]
     },
-    "files": ["src/type.d.ts", "src/data/products.json"],
+    "files": ["src/type.d.ts"],
     "include": ["src/**/*"],
     "exclude": ["node_modules"]
 }
