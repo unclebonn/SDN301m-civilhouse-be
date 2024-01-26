@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb";
-import mongoose from "mongoose";
+import { ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
 
 // Material Schema
 const materialSchema = new mongoose.Schema({
@@ -10,5 +10,4 @@ const materialSchema = new mongoose.Schema({
   unitPrice: String
 });
 
-
-export const Material = mongoose.model("Material", materialSchema);
+export const Material = mongoose.model('Material', materialSchema);

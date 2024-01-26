@@ -1,10 +1,10 @@
-import { ObjectId } from "mongodb";
-import mongoose from "mongoose";
+import { ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
 
-// ItemType Schema  
+// ItemType Schema
 const itemTypeSchema = new mongoose.Schema({
-    _id: ObjectId,
-    name: String
+  _id: ObjectId,
+  name: String
 });
 
-export const ItemType = mongoose.model("ItemType", itemTypeSchema);
+export const ItemType = mongoose.model('ItemType', itemTypeSchema);
