@@ -18,6 +18,19 @@ class UserController {
     }
   );
 
+  public getUserById = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+      const user = await User.findById(req.params.id);
+
+      res.status(200).json({
+        status: 'success',
+        data: {
+          user
+        }
+      });
+    }
+  );
+
   public createUser = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       const user = await User.create(req.body);
