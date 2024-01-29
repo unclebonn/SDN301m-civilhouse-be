@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 
 // Building Schema
 const buildingSchema = new mongoose.Schema({
-  _id: ObjectId,
   name: String,
   description: String,
   length: Number,
