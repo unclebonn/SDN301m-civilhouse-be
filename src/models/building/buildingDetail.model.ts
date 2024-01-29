@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 // BuildingDetail Schema
 export const buildingDetailSchema = new mongoose.Schema({
-  _id: ObjectId,
+  // _id: ObjectId,
   buildingID: { type: ObjectId, ref: 'Building' },
   itemID: { type: ObjectId, ref: 'Item' }
 });
