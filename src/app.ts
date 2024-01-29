@@ -9,12 +9,10 @@ import hpp from 'hpp';
 import AppError from './utils/appError';
 import globalErrorHandler from './controllers/error.controller';
 import userRouter from './routes/user.route';
-import requestTimeMiddleware from './middlewares/requestTimeMiddleware';
 import morgan from 'morgan';
-import buildingRouter from "./routes/building.route";
+import buildingRouter from './routes/building.route';
 
 const app = express();
-
 
 // 1) GLOBAL MIDDLEWARES
 // set security HTTP headers

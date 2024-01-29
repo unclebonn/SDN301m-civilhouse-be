@@ -43,6 +43,28 @@ class UserController {
       });
     }
   );
+
+  public deactivateSelf = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+      await User.findByIdAndUpdate(req.user!.id, { active: false });
+
+      res.status(204).json({
+        status: 'success',
+        message: 'User deactivated!'
+      });
+    }
+  );
+
+  public deleteUserById = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+      await User.findByIdAndDelete(req.params.id);
+
+      res.status(204).json({
+        status: 'success',
+        message: 'User deleted!'
+      });
+    }
+  );
 }
 
 export default new UserController();
