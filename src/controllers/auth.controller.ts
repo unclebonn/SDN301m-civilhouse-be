@@ -24,8 +24,6 @@ class AuthController {
     statusCode: number,
     res: Response
   ) => {
-    const allowedFields = ['username', 'email', 'photo', 'phone', 'role'];
-
     const token = this.signToken(user._id);
     const cookieOptions = {
       // convert to milliseconds
@@ -40,13 +38,9 @@ class AuthController {
 
     res.cookie('jwt', token, cookieOptions);
 
-    // Remove password from user response
-    const userResponse = user.toObject();
-    delete userResponse.password;
-
     // Remove fields that are not allowed to be sent to client
-    // TODO:
-    // const userResponse = filterObject(user.toObject(), allowedFields);
+    const allowedFields = ['username', 'email', 'photo', 'phone', 'role'];
+    const userResponse = filterObject(user, allowedFields);
 
     res.status(statusCode).json({
       status: 'success',
@@ -74,18 +68,18 @@ class AuthController {
   public login = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       const { username, password } = req.body;
-      // Check if email and password inputted
+      // Check if username and password inputted
       if (!username || !password) {
-        return next(new AppError('Please provide email and password!', 400));
+        return next(new AppError('Please provide username and password!', 400));
       }
       // Check if user exists and password is correct
       // +password is to select password field which is set to select: false in userModel.js
       const user = await User.findOne({ username }).select('+password');
 
       if (!user || !(await user.verifyPassword(password, user.password!))) {
-        return next(new AppError('Incorrect email or password!', 401));
+        return next(new AppError('Incorrect username or password!', 401));
       }
-      // If everything is ok, send token to client
+
       this.createSendToken(user, 200, res);
     }
   );

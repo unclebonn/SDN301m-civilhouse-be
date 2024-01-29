@@ -1,19 +1,7 @@
-type FilteredObject<T> = {
-  [K in keyof T]: T[K];
-};
+import _ from 'lodash';
 
-const filterObject = <T>(
-  obj: T,
-  ...filterFields: Array<keyof T>
-): FilteredObject<T> => {
-  const newObj: Partial<FilteredObject<T>> = {};
-  Object.keys(obj as object).forEach((el) => {
-    const key = el as keyof T;
-    if (filterFields.includes(key)) {
-      newObj[key] = obj[key];
-    }
-  });
-  return newObj as FilteredObject<T>;
+const filterObject = (obj: object, filterFields: string[]) => {
+  return _.pick(obj, filterFields);
 };
 
 export default filterObject;
