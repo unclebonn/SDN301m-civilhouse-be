@@ -9,13 +9,14 @@ import hpp from 'hpp';
 import AppError from './utils/appError';
 import globalErrorHandler from './controllers/error.controller';
 import userRouter from './routes/user.route';
-import requestTimeMiddleware from './middlewares/requestTimeMiddleware';
+import roleRouter from './routes/role.route';
+import blogRouter from './routes/blog.route';
 import morgan from 'morgan';
 import buildingRouter from "./routes/building.route";
 import contractRouter from "./routes/contract.route";
+import buildingDetailRouter from "./routes/buildingdetail.route";
 
 const app = express();
-
 
 // 1) GLOBAL MIDDLEWARES
 // set security HTTP headers
@@ -64,8 +65,11 @@ app.use(express.static(`${__dirname}/public`));
 
 // 2) ROUTES
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/role', roleRouter);
+app.use('/api/v1/blog', blogRouter);
 app.use('/api/v1/building', buildingRouter);
-app.use('/api/v1/contract', contractRouter)
+app.use('/api/v1/contract', contractRouter);
+app.use('/api/v1/buildingdetail', buildingDetailRouter);
 
 // 3) ERROR HANDLING
 app.all('*', (req, res, next) => {
