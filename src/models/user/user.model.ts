@@ -1,9 +1,10 @@
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 import validator from 'validator';
+import bcrypt from 'bcryptjs';
+import { IUser } from './user.interface';
 
-const userSchema = new mongoose.Schema({
-  // _id: ObjectId,
+const userSchema = new mongoose.Schema<IUser>({
   username: { type: String, required: true },
   password: { type: String, required: true },
   passwordConfirm: {
@@ -33,8 +34,11 @@ const userSchema = new mongoose.Schema({
     enum: ['admin', 'user'],
     default: 'user'
   },
-  status: Boolean,
-  phone: { type: String, required: true, unique: true },
+  phone: {
+    type: String,
+    required: [true, 'Phone number is required!'],
+    unique: true
+  },
   address: String,
   firstName: String,
   lastName: String,
@@ -45,5 +49,29 @@ const userSchema = new mongoose.Schema({
     default: true
   }
 });
+
+userSchema.pre<IUser>(/^find/, function (next) {
+  (this as any).find({ active: { $ne: false } });
+  next();
+});
+
+// hash password before saving to database
+userSchema.pre<IUser>('save', async function (next) {
+  // Only run this function if password was actually modified
+  if (!this.isModified('password')) return next();
+  // Hash the password with cost of 12
+  this.password = await bcrypt.hash((this as any).password, 12);
+  // Delete passwordConfirm field
+  this.passwordConfirm = '';
+  next();
+});
+
+// verify password
+userSchema.methods.verifyPassword = async function (
+  inputPassword: string,
+  userPassword: string
+) {
+  return await bcrypt.compareSync(inputPassword, userPassword);
+};
 
 export const User = mongoose.model('User', userSchema);

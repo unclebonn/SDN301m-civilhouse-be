@@ -11,7 +11,6 @@ import globalErrorHandler from './controllers/error.controller';
 import userRouter from './routes/user.route';
 import roleRouter from './routes/role.route';
 import blogRouter from './routes/blog.route';
-import requestTimeMiddleware from './middlewares/requestTimeMiddleware';
 import morgan from 'morgan';
 import buildingRouter from './routes/building.route';
 
