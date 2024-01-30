@@ -13,7 +13,9 @@ import roleRouter from './routes/role.route';
 import blogRouter from './routes/blog.route';
 import morgan from 'morgan';
 import buildingRouter from "./routes/building.route";
+import contractRouter from "./routes/contract.route";
 import buildingDetailRouter from "./routes/buildingdetail.route";
+
 const app = express();
 
 // 1) GLOBAL MIDDLEWARES
@@ -66,6 +68,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/role', roleRouter);
 app.use('/api/v1/blog', blogRouter);
 app.use('/api/v1/building', buildingRouter);
+app.use('/api/v1/contract', contractRouter);
 app.use('/api/v1/buildingdetail', buildingDetailRouter);
 
 // 3) ERROR HANDLING
