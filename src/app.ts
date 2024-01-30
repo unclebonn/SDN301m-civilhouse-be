@@ -9,6 +9,8 @@ import hpp from 'hpp';
 import AppError from './utils/appError';
 import globalErrorHandler from './controllers/error.controller';
 import userRouter from './routes/user.route';
+import roleRouter from './routes/role.route';
+import blogRouter from './routes/blog.route';
 import requestTimeMiddleware from './middlewares/requestTimeMiddleware';
 
 const app = express();
@@ -62,9 +64,12 @@ app.use(express.static(`${__dirname}/public`));
 
 // 2) ROUTES
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/role', roleRouter);
+app.use('/api/v1/blog', blogRouter);
 
 // 3) ERROR HANDLING
 app.all('*', (req, res, next) => {
+  console.log('why', req.baseUrl);
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
