@@ -12,7 +12,11 @@ router
   .route('/')
   .get(userController.getAllUsers)
   .post(protectRoute, restrictTo('admin'), userController.createUser)
-  .patch(protectRoute, restrictTo('admin'), userController.deactivateSelf);
+  .patch(
+    protectRoute,
+    restrictTo('admin', 'user'),
+    userController.deactivateSelf
+  );
 
 router
   .route('/:id')
