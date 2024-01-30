@@ -4,9 +4,9 @@ import {
   deleteBlog,
   getAllBlog,
   getOneBlog,
-  updateBlog,
-  validateBlog
+  updateBlog
 } from '~/controllers';
+import { validateBlog } from '~/middlewares/blogVerifying.middleware';
 
 const router = Router();
 
