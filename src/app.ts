@@ -12,10 +12,10 @@ import userRouter from './routes/user.route';
 import roleRouter from './routes/role.route';
 import blogRouter from './routes/blog.route';
 import requestTimeMiddleware from './middlewares/requestTimeMiddleware';
+import morgan from 'morgan';
+import buildingRouter from './routes/building.route';
 
 const app = express();
-
-import morgan from 'morgan';
 
 // 1) GLOBAL MIDDLEWARES
 // set security HTTP headers
@@ -66,6 +66,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/role', roleRouter);
 app.use('/api/v1/blog', blogRouter);
+app.use('/api/v1/building', buildingRouter);
 
 // 3) ERROR HANDLING
 app.all('*', (req, res, next) => {
