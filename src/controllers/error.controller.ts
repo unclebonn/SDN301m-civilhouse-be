@@ -5,8 +5,8 @@ const devError = (err: AppError, res: Response) => {
   res.status(err.statusCode).json({
     status: err.status,
     error: err,
-    message: err.message,
-    stack: err.stack
+    message: err.message
+    // stack: err.stack
   });
 };
 
