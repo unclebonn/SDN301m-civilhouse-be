@@ -12,6 +12,7 @@ import userRouter from './routes/user.route';
 import requestTimeMiddleware from './middlewares/requestTimeMiddleware';
 import morgan from 'morgan';
 import buildingRouter from "./routes/building.route";
+import contractRouter from "./routes/contract.route";
 
 const app = express();
 
@@ -64,6 +65,7 @@ app.use(express.static(`${__dirname}/public`));
 // 2) ROUTES
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/building', buildingRouter);
+app.use('/api/v1/contract', contractRouter)
 
 // 3) ERROR HANDLING
 app.all('*', (req, res, next) => {
