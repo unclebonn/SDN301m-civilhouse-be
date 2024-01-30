@@ -70,7 +70,6 @@ app.use('/api/v1/building', buildingRouter);
 
 // 3) ERROR HANDLING
 app.all('*', (req, res, next) => {
-  console.log('why', req.baseUrl);
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 

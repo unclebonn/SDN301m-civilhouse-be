@@ -1,8 +1,8 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import roleController from '~/controllers/role.controller';
+import { Router } from 'express';
+import { changeUserRole, getUserRole } from '~/controllers';
 
 const router = Router();
 
-router.route('/:id').get(roleController.getUserRole);
+router.route('/:id').get(getUserRole).put(changeUserRole);
 
 export default router;
