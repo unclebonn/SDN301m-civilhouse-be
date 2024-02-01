@@ -15,6 +15,8 @@ import morgan from 'morgan';
 import buildingRouter from "./routes/building.route";
 import contractRouter from "./routes/contract.route";
 import buildingDetailRouter from "./routes/buildingdetail.route";
+import materialRouter from "./routes/material.route";
+import materialTypeRouter from "./routes/materialType.route";
 
 const app = express();
 
@@ -70,6 +72,8 @@ app.use('/api/v1/blog', blogRouter);
 app.use('/api/v1/building', buildingRouter);
 app.use('/api/v1/contract', contractRouter);
 app.use('/api/v1/buildingdetail', buildingDetailRouter);
+app.use('/api/v1/material', materialRouter);
+app.use('/api/v1/materialType', materialTypeRouter);
 
 // 3) ERROR HANDLING
 app.all('*', (req, res, next) => {
