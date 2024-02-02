@@ -23,6 +23,8 @@ export const protectRoute = catchAsync(
     let token;
     if (authorizationHeader && authorizationHeader.startsWith('Bearer')) {
       token = authorizationHeader.split(' ')[1];
+    } else if (req.cookies.jwt) {
+      token = req.cookies.jwt;
     }
 
     // Response if token is invalid
