@@ -1,16 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import { Blog, User } from '~/models';
-import { body, validationResult } from 'express-validator';
+import { Blog } from '~/models';
 import catchAsync from '~/utils/catchAsync';
 import { ObjectId } from 'mongodb';
 import AppError from '~/utils/appError';
 
 export const createBlog = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    console.log(req.body);
     const blog = await Blog.create({ ...req.body });
     console.log('response', req.originalUrl);
     res.status(201).json({
