@@ -23,6 +23,8 @@ export const protectRoute = catchAsync(
     let token;
     if (authorizationHeader && authorizationHeader.startsWith('Bearer')) {
       token = authorizationHeader.split(' ')[1];
+    } else if (req.cookies.jwt) {
+      token = req.cookies.jwt;
     }
 
     // Response if token is invalid
@@ -33,15 +35,11 @@ export const protectRoute = catchAsync(
     }
 
     // Verify token
-    //   const decodedJWT = (await promisify(jwt.verify)(
-    //     token,
-    //     process.env.JWT_SECRET
-    //   )) as { id: string };
-
     const decodedJWT = (await jwt.verify(token, process.env.JWT_SECRET!)) as {
       id: string;
     };
 
+    // Check if user still exists
     const currentUser = await User.findById(decodedJWT.id);
 
     if (!currentUser) {
@@ -63,7 +61,6 @@ export const protectRoute = catchAsync(
     // Grant access to the protected route
     filterObject(currentUser.toObject, allowedFields);
     req.user = currentUser;
-    console.log(req.user);
     next();
   }
 );
@@ -71,7 +68,7 @@ export const protectRoute = catchAsync(
 export const restrictTo =
   (...roles: string[]) =>
   (req: Request, res: Response, next: NextFunction) => {
-    // Roles is an array ['admin', 'user']
+    // Roles is an array ['admin', 'staff', 'customer']
     // req.user.role is 'user' passed from protectRoute middleware
     // Since protectRoute middleware is called before this middleware
     if (!roles.includes(req.user!.role)) {

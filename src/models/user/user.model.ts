@@ -6,7 +6,7 @@ import { IUser } from './user.interface';
 
 const userSchema = new mongoose.Schema<IUser>({
   username: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   passwordConfirm: {
     type: String,
     required: [true, 'Password confirm is required!'],
@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema<IUser>({
         return val === (this as any).password;
       },
       message: 'Passwords are not the same!'
-    }
+    },
+    select: false
   },
   email: {
     type: String,
@@ -31,8 +32,8 @@ const userSchema = new mongoose.Schema<IUser>({
   },
   role: {
     type: String,
-    enum: ['admin', 'user'],
-    default: 'user'
+    enum: ['admin', 'customer', 'staff'],
+    default: 'customer'
   },
   phone: {
     type: String,
