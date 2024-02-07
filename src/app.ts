@@ -12,11 +12,11 @@ import userRouter from './routes/user.route';
 import roleRouter from './routes/role.route';
 import blogRouter from './routes/blog.route';
 import morgan from 'morgan';
-import buildingRouter from "./routes/building.route";
-import contractRouter from "./routes/contract.route";
-import buildingDetailRouter from "./routes/buildingdetail.route";
-import materialRouter from "./routes/material.route";
-import materialTypeRouter from "./routes/materialType.route";
+import buildingRouter from './routes/building.route';
+import contractRouter from './routes/contract.route';
+import buildingDetailRouter from './routes/buildingdetail.route';
+import materialRouter from './routes/material.route';
+import materialTypeRouter from './routes/materialType.route';
 
 const app = express();
 
