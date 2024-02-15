@@ -59,7 +59,7 @@ class AuthController {
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
         phone: req.body.phone,
-        role: 'user'
+        role: 'customer'
       });
 
       this.createSendToken(newUser, 201, res);
