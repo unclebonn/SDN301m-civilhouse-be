@@ -70,7 +70,7 @@ export const sendImgtoFirebase = catchAsync(
         await uploadImgToFirebaseAndGetURL(file, req);
       }
     }
-    isWrongFileType = false;
+    isWrongFileType && (isWrongFileType = false);
     next();
   }
 );
