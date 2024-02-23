@@ -48,7 +48,6 @@ export const updateBuildingDetailById = catchAsync(async (req: Request, res: Res
     const _id = req.params.id;
     const newData = req.body;
     const building = await BuildingDetail.findByIdAndUpdate(_id, newData, { new: true });
-
     res.status(200).json({
         status: "updateSuccess",
         data: {

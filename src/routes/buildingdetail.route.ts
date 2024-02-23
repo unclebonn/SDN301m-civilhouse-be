@@ -1,21 +1,35 @@
+import { verify } from 'crypto';
 import { Router } from 'express';
+import { validate } from 'json-schema';
 import { createBuildingDetail, getBuildingDetail, getBuildingDetailById, deleteBuildingDetailById, updateBuildingDetailById } from '~/controllers';
+import { checkIDifExisted, validateBuildingDetail, validateBuildingDetailUpdate, verifyBuildingDetail } from '~/middlewares/buildingdetailVerifying.middleware';
 
 const router = Router();
 
 router
     .route("/")
-    //get building
-    .get(getBuildingDetail)
     // create building
-    .post(createBuildingDetail)
+    .post(
+        validateBuildingDetail,
+        verifyBuildingDetail,
+        createBuildingDetail
+    );
+
+// get all buiding
+router.route("/all").get(getBuildingDetail);
 
 router.route("/:id")
     //get building by id
     .get(getBuildingDetailById)
     // delete building by id
-    .delete(deleteBuildingDetailById)
+    .delete(
+        checkIDifExisted,
+        deleteBuildingDetailById)
     //update building
-    .put(updateBuildingDetailById);
+    .put(
+        checkIDifExisted,
+        validateBuildingDetailUpdate,
+        verifyBuildingDetail,
+        updateBuildingDetailById);
 
 export default router;
